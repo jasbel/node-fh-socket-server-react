@@ -18,6 +18,11 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.6",
-    "socket.io": "^2.3.0"
+    "socket.io": "^4.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.5.1"
   }
 }
