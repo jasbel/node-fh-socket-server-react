@@ -34,6 +34,7 @@ class Server {
 
     this.app.use(express.json());
     this.app.use("/api/login", require("./api/auth/auth.routes"));
+    this.app.use("/api/messages", require("./api/message/message.routes"));
   }
 
   // Esta configuración se puede tener aquí o como propieda de clase
