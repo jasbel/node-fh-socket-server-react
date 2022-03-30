@@ -5,7 +5,7 @@ const socketio = require("socket.io");
 const path = require("path");
 const cors = require("cors");
 
-const Sockets = require("./models/sockets");
+const Sockets = require("./api/socket/socket.model");
 const { dbConnection } = require("./database/config");
 
 class Server {

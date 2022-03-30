@@ -4,6 +4,7 @@ const jsonwebtoken = require("jsonwebtoken")
 const validateJWT = (req, res, next) => {
   try {
     const token = req.header('x-token');
+    console.log(token)
 
     if(!token) return res.status(401).json({ok: !1, msg: 'sin token'})
 
