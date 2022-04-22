@@ -1,5 +1,5 @@
 const { comprobarJWT } = require("../../helpers/jwt");
-const { userConnect, userDisconnect } = require("./socket.controller");
+const { userConnect, userDisconnect, getUsers } = require("./socket.controller");
 
 class Sockets {
   constructor(io) {
@@ -17,7 +17,7 @@ class Sockets {
         return socket.disconnect();
       }
 
-      const user = await userConnect(uid)
+      const user = await userConnect(uid);
 
       console.log("cliente conectado ", user.name);
 
@@ -33,6 +33,7 @@ class Sockets {
       // tOD: user active with uis
 
       // emit user conecteds
+      this.io.emit("list-users", await getUsers());
       // TODO: socket join with uid
 
       // TODO: eschua cliente when sen messafe
@@ -40,8 +41,10 @@ class Sockets {
       // TODO: emit all users
 
       socket.on("disconnect", async () => {
-        const user = await userDisconnect(uid)
+        const user = await userDisconnect(uid);
         console.log("cliente desconectado ", user.name);
+        // volver a emitir de todos los usuarios
+        this.io.emit("list-users", await getUsers());
       });
     });
   }

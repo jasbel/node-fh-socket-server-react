@@ -14,16 +14,17 @@ const userConnect = async (uid) => {
 };
 
 const userDisconnect = async (uid) => {
-  // const user = await UsersModel.findById(uid);
-  // user.online = false;
-
-  // await user.save();
-
-  // return user;
   return await changeConnect(uid, false);
 };
+
+const getUsers = async () => {
+  const users = await UsersModel.find().sort('-online')
+
+  return users
+}
 
 module.exports = {
   userConnect,
   userDisconnect,
+  getUsers
 };
