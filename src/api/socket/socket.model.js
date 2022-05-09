@@ -1,5 +1,5 @@
 const { comprobarJWT } = require("../../helpers/jwt");
-const { userConnect, userDisconnect, getUsers } = require("./socket.controller");
+const { userConnect, userDisconnect, getUsers, saveMessage } = require("./socket.controller");
 
 class Sockets {
   constructor(io) {
@@ -21,6 +21,9 @@ class Sockets {
 
       console.log("cliente conectado ", user.name);
 
+      // unir a una sal de chat soclet.io con userId
+      socket.join(uid); // uniendo socket.io con userUID
+
       /* // Escuchar evento: mensaje-to-server
             socket.on('mensaje-to-server', ( data ) => {
                 console.log( data );
@@ -36,8 +39,14 @@ class Sockets {
       this.io.emit("list-users", await getUsers());
       // TODO: socket join with uid
 
-      // TODO: eschua cliente when sen messafe
+      // TODO: listen how client sent msg
+      socket.on("message-personal", async (payload) => {
+        const msg = await saveMessage(payload);
+        console.log({ payloadMP: payload, msg });
+      });
+
       // TODO: user conecta or deisconect emit a BD
+
       // TODO: emit all users
 
       socket.on("disconnect", async () => {

@@ -5,7 +5,7 @@ const MessageSchema = Schema(
   {
     from: { type: Schema.Types.ObjectId, ref: "User", required: true },
     to: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    message: { type: String, required: true },
+    msg: { type: String, required: true },
   },
   { timestamps: true }
 );
