@@ -42,7 +42,8 @@ class Sockets {
       // TODO: listen how client sent msg
       socket.on("message-personal", async (payload) => {
         const msg = await saveMessage(payload);
-        console.log({ payloadMP: payload, msg });
+        this.io.to(payload.to).emit('message-personal', msg)
+        this.io.to(payload.from).emit('message-personal', msg)
       });
 
       // TODO: user conecta or deisconect emit a BD
