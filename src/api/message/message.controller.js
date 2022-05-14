@@ -3,7 +3,9 @@ const messageModel = require("./message.model");
 const getChat = async (req, res) => {
   try {
     const id = req.uid;
-    const msgFrom = req.param.msgFrom;
+    console.log({id})
+    const msgFrom = req.params.from;
+    console.log({reqparam: JSON.stringify(req.params)})
 
     const last30Msgs = await messageModel
       .find({
@@ -12,7 +14,7 @@ const getChat = async (req, res) => {
           { from: msgFrom, to: id },
         ],
       })
-      .sort({ createdAt: "desc" })
+      .sort({ createdAt: "asc" })
       .limit(30);
 
     res.json({ ok: !0, msg: last30Msgs });
