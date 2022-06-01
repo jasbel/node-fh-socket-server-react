@@ -1,5 +1,5 @@
-const UsersModel = require("../user/Users.model");
-const Message = require("../message/message.model");
+import UsersModel from "../user/Users.model";
+import Message from "../message/message.model";
 
 const changeConnect = async (uid, isOnline) => {
   const user = await UsersModel.findById(uid);
@@ -10,21 +10,21 @@ const changeConnect = async (uid, isOnline) => {
   return user;
 };
 
-const userConnect = async (uid) => {
+export const userConnect = async (uid) => {
   return await changeConnect(uid, true);
 };
 
-const userDisconnect = async (uid) => {
+export const userDisconnect = async (uid) => {
   return await changeConnect(uid, false);
 };
 
-const getUsers = async () => {
+export const getUsers = async () => {
   const users = await UsersModel.find().sort("-online");
 
   return users;
 };
 
-const saveMessage = async (payload) => {
+export const saveMessage = async (payload) => {
   try {
     const message = new Message(payload);
     await message.save();
@@ -36,9 +36,3 @@ const saveMessage = async (payload) => {
   }
 };
 
-module.exports = {
-  userConnect,
-  userDisconnect,
-  getUsers,
-  saveMessage
-};

@@ -1,7 +1,7 @@
-const { Schema, model } = require("mongoose");
+import { model, Schema } from "mongoose";
 
 /** params: from, to, message */
-const MessageSchema = Schema(
+const MessageSchema = new Schema(
   {
     from: { type: Schema.Types.ObjectId, ref: "User", required: true },
     to: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -16,4 +16,4 @@ MessageSchema.method("toJSON", function () {
   return object;
 });
 
-module.exports = model("Message", MessageSchema);
+export default model("Message", MessageSchema);

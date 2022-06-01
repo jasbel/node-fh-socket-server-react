@@ -1,12 +1,10 @@
-/**
- * path: ???
- */
+import { Router } from "express";
 
-const { Router } = require("express");
-const { check } = require("express-validator");
-const { validateFields } = require("../../middlewares/validate-fields");
-const { validateJWT } = require("../../middlewares/validate-jwt");
-const { createUser, login, renew: renewToken } = require("./auth.controller");
+/** path: ??? */
+import { check } from "express-validator";
+import { validateFields } from "../../middlewares/validate-fields";
+import { validateJWT } from "../../middlewares/validate-jwt";
+import { createUser, login, renew as renewToken } from "./auth.controller";
 
 const router = Router();
 
@@ -33,4 +31,4 @@ router.post(
 
 router.get("/renew", [validateJWT], renewToken);
 
-module.exports = router;
+export default router;

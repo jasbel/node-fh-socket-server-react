@@ -1,8 +1,9 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
 
-const dbConnection = async () => {
+export const dbConnection = async () => {
   try {
-    await mongoose.connect(process.env.DB_CNN_STRING, {
+    await mongoose.connect(process.env.DB_CNN_STRING!, {
+      // @ts-ignore
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
@@ -12,8 +13,4 @@ const dbConnection = async () => {
     console.log({error});
     throw new Error('Error en la base de datos - vea logs')
   }
-}
-
-module.exports = {
-  dbConnection,
 }

@@ -1,10 +1,10 @@
 const bcryptjs = require("bcryptjs");
 const { response } = require("express");
 const { generateJWT } = require("../../helpers/jwt");
-const UsersModel = require("../user/Users.model");
+import UsersModel from "../user/Users.model";
 
 /* eslint-disable no-console */
-const createUser = async (req, res = response) => {
+export const createUser = async (req, res = response) => {
   try {
     const { email, password } = req.body;
 
@@ -28,7 +28,7 @@ const createUser = async (req, res = response) => {
   }
 };
 
-const login = async (req, res = response) => {
+export const login = async (req, res = response) => {
   try {
     const { email, password } = req.body;
 
@@ -50,7 +50,7 @@ const login = async (req, res = response) => {
   }
 };
 
-const renew = async (req, res = response) => {
+export const renew = async (req, res = response) => {
   const {uid} = req;
 
   const token = await generateJWT(uid)
@@ -59,10 +59,4 @@ const renew = async (req, res = response) => {
 
 
   res.json({ ok: true, token, user});
-};
-
-module.exports = {
-  createUser,
-  login,
-  renew,
 };

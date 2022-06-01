@@ -1,6 +1,6 @@
-const messageModel = require("./message.model");
+import messageModel from "./message.model";
 
-const getChat = async (req, res) => {
+export const getChat = async (req, res) => {
   try {
     const id = req.uid;
     console.log({id})
@@ -21,8 +21,4 @@ const getChat = async (req, res) => {
   } catch (error) {
     res.status(500).json({ msg: "error", error });
   }
-};
-
-module.exports = {
-  getChat,
 };
